@@ -1,0 +1,23 @@
+:host {
+  margin-top: 96px;
+  min-height: calc(100vh - 96px);
+  width: 100%;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0 112px;
+
+  @media (max-width: 1100px) {
+    flex-flow: column;
+    justify-content: flex-start;
+
+    & > app-home-disc {
+      margin-top: 60px;
+
+      &:last-child {
+        margin-bottom: 112px;
+      }
+    }
+  }
+}

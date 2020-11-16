@@ -1,0 +1,55 @@
+.home-disc {
+  width: 240px;
+  display: inline-block;
+  cursor: pointer;
+
+  &__icon {
+    height: 240px;
+    width: 240px;
+    margin-bottom: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      border-radius: 50%;
+      transition: all 0.1s linear;
+    }
+  }
+
+  &__text {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 36px;
+    text-align: center;
+    user-select: none;
+  }
+
+  &.first {
+    .home-disc__icon {
+      background: #fd5620;
+    }
+  }
+
+  &.second {
+    .home-disc__icon {
+      background: #43b2cb;
+    }
+  }
+
+  &.third {
+    .home-disc__icon {
+      background: #fdaf2b;
+    }
+  }
+
+  &:hover {
+    .home-disc__icon img {
+      transform: rotate(25deg);
+    }
+
+    .home-disc__text {
+    }
+  }
+}

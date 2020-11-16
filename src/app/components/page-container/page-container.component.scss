@@ -1,0 +1,44 @@
+.page-container {
+  margin-top: 96px;
+  min-height: calc(100vh - 96px);
+  width: 100%;
+  background: #000000;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 112px 112px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+
+  &__title {
+    padding-top: 84px;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 48px;
+    color: #ffffff;
+    position: relative;
+    text-transform: uppercase;
+    display: inline-block;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 3px;
+      right: 0;
+      bottom: -24px;
+      height: 10px;
+      background: #fd5620;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    margin-top: 96px;
+    width: 100%;
+    position: relative;
+  }
+
+  @media (max-width: 1100px) {
+    padding: 0 20px 20px;
+  }
+}

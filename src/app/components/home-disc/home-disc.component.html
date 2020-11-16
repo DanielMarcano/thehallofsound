@@ -1,0 +1,16 @@
+<div
+  (click)="onClick()"
+  [ngClass]="{
+    'home-disc': true,
+    first: color === 'first',
+    second: color === 'second',
+    third: color === 'third'
+  }"
+>
+  <div class="home-disc__icon">
+    <img class="" src="/assets/big-disc.svg" alt="" />
+  </div>
+  <div class="home-disc__text">
+    <p>{{ text }}</p>
+  </div>
+</div>

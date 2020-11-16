@@ -1,0 +1,46 @@
+.panel-container {
+  height: 100%;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &__option {
+    flex: 1;
+    font-weight: bold;
+    font-size: 102px;
+    line-height: 102px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 48px;
+
+    &__text {
+      display: inline-block;
+      color: #000000;
+    }
+
+    &.first {
+      background: #fd5620;
+    }
+
+    &.second {
+      background: #43b2cb;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    flex-flow: column;
+    position: relative;
+
+    &__option {
+      font-size: 58px;
+      line-height: 58px;
+      text-align: center;
+    }
+  }
+}

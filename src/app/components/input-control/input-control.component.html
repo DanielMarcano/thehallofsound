@@ -1,0 +1,25 @@
+<label
+  [ngClass]="[
+    'input-control__label',
+    this.focused ? 'focused' : '',
+    this.error ? 'invalid' : ''
+  ]"
+  [for]="formControlName"
+  >{{ inputLabel }}</label
+>
+
+<input
+  class="input-control__input"
+  (focus)="updateFocus(true)"
+  (blur)="updateFocus(false)"
+  [placeholder]="placeholder"
+  [id]="formControlName"
+  [value]="value"
+  [disabled]="isDisabled"
+  [type]="type || 'text'"
+  (input)="onInput($event)"
+/>
+
+<div class="input-control__error">
+  <p>{{ error }}</p>
+</div>

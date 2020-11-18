@@ -7,12 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./home-disc.component.scss'],
 })
 export class HomeDiscComponent implements OnInit {
-  @Input() color: 'first' | 'second' | 'third';
+  @Input() color: 'primary' | 'secondary' | 'tertiary';
   @Input() text: string;
   @Input() link: string;
 
   constructor(private route: ActivatedRoute, private router: Router) {
-    this.color = 'first';
+    this.color = 'primary';
     this.text = '';
     this.link = '';
   }

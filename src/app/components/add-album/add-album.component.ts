@@ -1,6 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { IFormGroup } from '@rxweb/types';
+import { Album } from '../../services/albums/album-api-model';
+import { AlbumApiService } from '../../services/albums/album-api.service';
+import { removeEmptyProps } from '../../utilities/utilities';
+import { NotificationsService } from '../notifications.service';
 
 @Component({
   selector: 'app-add-album',
@@ -8,49 +18,76 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./add-album.component.scss'],
 })
 export class AddAlbumComponent implements OnInit {
-  addAlbumForm = this.fb.group({
-    name: ['', Validators.required],
-    year: ['', Validators.required],
-    genre: ['', Validators.required],
-    coverUrl: [''],
-  });
+  addAlbumForm: IFormGroup<Album>;
 
   public selectedFile = '';
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
-
-  ngOnInit(): void {
-    // this.addAlbumForm.valueChanges.subscribe(value => this.updateStore(value));
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private albumApiService: AlbumApiService,
+    private notificationsService: NotificationsService
+  ) {
+    this.addAlbumForm = this.fb.group({
+      title: ['', Validators.required],
+      // artistId: [''],
+      coverUrl: [''],
+      year: [
+        null,
+        [Validators.maxLength(4), Validators.min(1909), Validators.max(2030)],
+      ],
+      genre: [''],
+    }) as IFormGroup<Album>;
   }
+
+  ngOnInit(): void {}
 
   onSubmit(): void {
-    alert('it worked');
+    this.submit();
   }
 
-  onFileChange(event: any): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-
-      this.addAlbumForm.patchValue({
-        coverUrl: file,
-      });
-
-      this.selectedFile = file.name;
-    }
+  get title(): AbstractControl | null {
+    return this.addAlbumForm.get('title');
   }
 
-  submit(): void {
-    const formData = new FormData();
-    formData.append('name', this.addAlbumForm?.get('name')?.value);
-    formData.append('year', this.addAlbumForm?.get('year')?.value);
-    formData.append('genre', this.addAlbumForm?.get('genre')?.value);
-    formData.append('file', this.addAlbumForm?.get('coverUrl')?.value);
+  get coverUrl(): AbstractControl | null {
+    return this.addAlbumForm.get('coverUrl');
+  }
 
-    this.http
-      .post('http://localhost:8001/upload.php', formData)
-      .subscribe((res) => {
-        console.log(res);
-        alert('Uploaded Successfully.');
-      });
+  get year(): AbstractControl | null {
+    return this.addAlbumForm.get('year');
+  }
+
+  get genre(): AbstractControl | null {
+    return this.addAlbumForm.get('genre');
+  }
+
+  resetForm(): void {
+    this.addAlbumForm.reset();
+  }
+
+  get untypedForm(): FormGroup {
+    return this.addAlbumForm as FormGroup;
+  }
+
+  async submit(): Promise<any> {
+    const parsedValue: Album = removeEmptyProps(this.addAlbumForm.value);
+
+    const response = await this.albumApiService.addAlbum(parsedValue);
+
+    response.subscribe((data: any) => {
+      if (data.error) {
+        this.notificationsService.add({
+          type: 'error',
+          text: data.error,
+        });
+      } else {
+        this.notificationsService.add({
+          type: 'success',
+          text: 'The album was successfully saved!',
+        });
+        this.resetForm();
+      }
+    });
   }
 }

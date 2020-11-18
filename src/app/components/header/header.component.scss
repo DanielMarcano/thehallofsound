@@ -1,3 +1,5 @@
+@import "colors";
+
 .header {
   height: 96px;
   width: 100%;
@@ -56,12 +58,34 @@
         color: #ffffff;
       }
 
-      &:active {
-        color: #43b2cb;
+      &.primary {
+        &:active {
+          color: $primary;
+        }
+
+        &:hover {
+          color: $primary;
+        }
       }
 
-      &:hover {
-        color: #43b2cb;
+      &.secondary {
+        &:active {
+          color: $secondary;
+        }
+
+        &:hover {
+          color: $secondary;
+        }
+      }
+
+      &.tertiary {
+        &:active {
+          color: $tertiary;
+        }
+
+        &:hover {
+          color: $tertiary;
+        }
       }
 
       &:not(:first-child) {

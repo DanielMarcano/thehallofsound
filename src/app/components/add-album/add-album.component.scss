@@ -14,64 +14,26 @@
   }
 
   &__form {
+    width: 100%;
+
     .form-item {
-      margin-bottom: 100px;
+      margin-bottom: 38px;
+      flex: 1;
+    }
+  }
 
-      &__label {
-        font-weight: bold;
-        font-size: 64px;
-        line-height: 64px;
-        color: #000000;
-        display: block;
-        margin-bottom: 16px;
+  &__row {
+    display: flex;
+
+    & > * {
+      &:not(:first-child) {
+        margin-left: 80px;
       }
+    }
 
-      &__input {
-        border: none;
-        background: #ffffff;
-        width: 400px;
-        font-weight: normal;
-        font-size: 64px;
-        line-height: 64px;
-        color: #000000;
-        border-bottom: 3px solid #000000;
-        transition: all 0.3s ease-in-out;
-
-        &:focus {
-          outline: none;
-          border-color: #fd5620;
-        }
-
-        input::placeholder {
-          color: rgba(0, 0, 0, 0.5);
-        }
-      }
-
-      &__input-file {
-        border: none;
-        background: #ffffff;
-        width: 400px;
-        border-bottom: 3px solid #000000;
-        transition: all 0.3s ease-in-out;
-        display: flex;
-        padding-bottom: 15px;
-        cursor: pointer;
-
-        span {
-          font-weight: normal;
-          font-size: 64px;
-          line-height: 64px;
-          color: #000000;
-        }
-
-        &:focus {
-          outline: none;
-          border-color: #fd5620;
-        }
-
-        input::placeholder {
-          color: rgba(0, 0, 0, 0.5);
-        }
+    &.single {
+      & > * {
+        max-width: calc(50% - 40px);
       }
     }
   }
@@ -82,12 +44,13 @@
     justify-content: space-between;
     flex: 1;
     width: 100%;
+    margin-bottom: 38px;
 
     &__item {
       color: #000000;
-      font-weight: bold;
-      font-size: 120px;
-      line-height: 120px;
+      font-weight: 600;
+      font-size: 64px;
+      line-height: 64px;
       transition: all 0.3s ease-in-out;
       cursor: pointer;
 
@@ -102,6 +65,33 @@
       &.disabled {
         opacity: 0.5;
         pointer-events: none;
+      }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    &__row {
+      flex-flow: column;
+
+      & > * {
+        &:not(:first-child) {
+          margin-left: 0;
+        }
+
+        flex: 1;
+      }
+
+      &.single {
+        & > * {
+          max-width: none;
+        }
+      }
+    }
+
+    &__buttons {
+      &__item {
+        font-size: 32px;
+        line-height: 32px;
       }
     }
   }

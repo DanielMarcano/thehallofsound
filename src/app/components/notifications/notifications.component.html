@@ -1,0 +1,23 @@
+<div
+  class="notification"
+  [ngClass]="[
+    notificationsService.notification ? 'active' : '',
+    notificationsService.notification
+      ? notificationsService.notification.type
+      : ''
+  ]"
+>
+  <ng-container *ngIf="notificationsService.notification">
+    <div class="notification__text">
+      {{ notificationsService.notification.text }}
+    </div>
+
+    <div
+      class="notification__button"
+      (click)="notificationsService.clear()"
+      role="button"
+    >
+      close
+    </div>
+  </ng-container>
+</div>

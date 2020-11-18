@@ -91,6 +91,19 @@ video {
   vertical-align: baseline;
 }
 
+/* Hide input[type="number"] arrows */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -137,9 +150,7 @@ table {
 *::after,
 *::before {
   box-sizing: border-box;
-  font-family: "Josefin Sans", Helvetica, Arial, serif !important;
-  font-weight: 400;
-  font-style: normal;
+  font-family: "Josefin Sans", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 

@@ -1,0 +1,109 @@
+@import "colors";
+
+:host {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  position: relative;
+}
+
+.input-file-container {
+  display: flex;
+  justify-content: space-between;
+
+  & > * {
+    width: calc(50% - 40px);
+  }
+}
+
+.input-file {
+  &__label {
+    display: block;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 64px;
+    color: #000000;
+    margin-bottom: 16px;
+  }
+
+  &__button {
+    height: 76px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    background: #000000;
+    color: #ffffff;
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease-in-out;
+
+    p {
+      padding-bottom: 12px;
+    }
+
+    &:hover {
+      color: $secondary;
+    }
+
+    &.file-name {
+      pointer-events: none;
+      justify-content: flex-start;
+      padding-left: 12px;
+
+      p {
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  &__error {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 32px;
+    color: #fd6f89;
+    margin-top: 12px;
+  }
+}
+
+.input-file-img {
+  background: #000000;
+  position: relative;
+  margin-top: 34px;
+
+  img {
+    height: 300px;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .delete {
+    position: absolute;
+    bottom: 0;
+    background: $special;
+
+    &:hover {
+      color: #000000;
+    }
+  }
+}
+
+input {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .input-file-container {
+    flex-flow: column;
+
+    & > * {
+      width: 100%;
+    }
+  }
+}

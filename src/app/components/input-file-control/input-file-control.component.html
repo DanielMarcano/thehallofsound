@@ -1,0 +1,33 @@
+<div class="input-file-container">
+  <div class="input-file">
+    <label class="input-file__label" [htmlFor]="formControlName">
+      {{ inputLabel }}
+    </label>
+
+    <div
+      role="button"
+      [ngClass]="['input-file__button', file?.name ? 'file-name' : '']"
+      (click)="inputFile.click()"
+    >
+      <p>{{ imageBase64 ? file?.name : "upload" }}</p>
+    </div>
+  </div>
+
+  <div class="input-file-img" *ngIf="imageBase64">
+    <img [src]="imageBase64" alt="" />
+
+    <div
+      role="button"
+      class="input-file__button delete"
+      (click)="writeValue(null)"
+    >
+      <p>delete</p>
+    </div>
+  </div>
+</div>
+
+<input #inputFile type="file" (change)="onFileChange($event)" />
+
+<div class="input-file__error">
+  <p>{{ error }}</p>
+</div>

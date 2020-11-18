@@ -1,0 +1,61 @@
+@import "colors";
+
+:host {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+.input-control {
+  &__input {
+    border: none;
+    background: #ffffff;
+    font-weight: normal;
+    font-size: 64px;
+    line-height: 64px;
+    color: #000000;
+    border-bottom: 3px solid #000000;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+      border-color: $secondary;
+    }
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &__label {
+    display: block;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 64px;
+    color: #000000;
+    margin-bottom: 16px;
+    transition: all 0.3s ease-in-out;
+
+    &.focused {
+      color: $secondary;
+    }
+
+    &.invalid {
+      color: $special;
+
+      & + input {
+        border-color: $special;
+      }
+    }
+  }
+
+  &__error {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    color: #fd6f89;
+    margin-top: 12px;
+  }
+}

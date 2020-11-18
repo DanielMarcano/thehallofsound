@@ -1,0 +1,3 @@
+{
+    "error": "The album could not be created. MongoError: E11000 duplicate key error collection: kenjo-cd-collection.albums index: title_1 dup key: { title: \"Lungs\" }"
+}

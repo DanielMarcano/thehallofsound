@@ -1,74 +1,65 @@
-<app-page-container title="Add Album">
+<app-page-container title="Add Album" color="secondary">
   <div class="add-album-container">
-    <form
-      [formGroup]="addAlbumForm"
-      (ngSubmit)="onSubmit()"
-      class="add-album-container__form"
-    >
-      <div class="form-item">
-        <label class="form-item__label" for="name">name*</label>
-        <input
-          class="form-item__input"
-          formControlName="name"
-          required
-          type="text"
-          id="name"
-        />
-      </div>
-      <div class="form-item">
-        <label class="form-item__label" for="birthdaten">year*</label>
-        <input
-          class="form-item__input"
-          placeholder="XXXX"
-          formControlName="year"
-          required
-          type="text"
-          id="year"
-        />
-      </div>
-      <div class="form-item">
-        <label class="form-item__label" for="genre">genre*</label>
-        <input
-          class="form-item__input"
-          placeholder="XXXX"
-          formControlName="genre"
-          required
-          type="text"
-          id="genre"
-        />
-      </div>
-      <div class="form-item">
-        <label class="form-item__label" for="cover">cover</label>
-        <button
-          class="form-item__input-file"
-          type="button"
-          (click)="fileInput.click()"
-        >
-          <span *ngIf="selectedFile !== ''">{{ selectedFile }}</span>
-          <span *ngIf="selectedFile === ''">upload</span>
-          <input
-            #fileInput
-            id="cover"
-            type="file"
-            formControlName="coverUrl"
-            (change)="onFileChange($event)"
-            style="display: none"
-          />
-        </button>
-      </div>
-    </form>
     <div class="add-album-container__buttons">
       <div class="add-album-container__buttons__item danger">
         <p>go back</p>
       </div>
       <div
-        [ngClass]="{
-          'add-album-container__buttons__item': true,
-          disabled: !addAlbumForm.valid
-        }"
+        (click)="onSubmit()"
+        [ngClass]="[
+          'add-album-container__buttons__item',
+          !addAlbumForm.valid ? 'disabled' : ''
+        ]"
       >
         <p>save</p>
       </div>
     </div>
+
+    <form
+      [formGroup]="untypedForm"
+      (ngSubmit)="onSubmit()"
+      class="add-album-container__form"
+    >
+      <div class="add-album-container__row">
+        <app-input-control
+          class="form-item"
+          inputLabel="title*"
+          formControlName="title"
+        ></app-input-control>
+        <app-input-control
+          class="form-item"
+          inputLabel="genre"
+          placeholder="indie"
+          formControlName="genre"
+        ></app-input-control>
+        <!-- <app-input-control
+          class="form-item"
+          inputLabel="artist"
+          placeholder="XXXX"
+          formControlName="artistId"
+        ></app-input-control> -->
+      </div>
+      <div class="add-album-container__row">
+        <app-file-upload
+          class="form-item"
+          formControlName="coverUrl"
+          inputLabel="cover"
+        ></app-file-upload>
+      </div>
+      <div class="add-album-container__row single">
+        <app-input-control
+          class="form-item"
+          inputLabel="year"
+          placeholder="XXXX"
+          type="number"
+          formControlName="year"
+          [error]="
+            year?.errors && year?.value.length === 4
+              ? 'must be between 1909 & 2030'
+              : ''
+          "
+        ></app-input-control>
+      </div>
+    </form>
   </div>
 </app-page-container>

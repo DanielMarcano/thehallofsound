@@ -21,6 +21,8 @@
     position: relative;
     text-transform: uppercase;
     display: inline-block;
+    max-width: 100%;
+    word-break: break-word;
 
     &::after {
       content: "";
@@ -65,5 +67,9 @@
 
   @media (max-width: 1100px) {
     padding: 0 20px 20px;
+
+    &__title {
+      align-self: center;
+    }
   }
 }

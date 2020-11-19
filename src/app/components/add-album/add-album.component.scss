@@ -1,3 +1,5 @@
+@import "colors";
+
 .add-album-container {
   background: #ffffff;
   padding: 28px;
@@ -55,11 +57,16 @@
       cursor: pointer;
 
       &.danger {
-        color: #fd6f89;
+        color: $special;
       }
 
       &:hover {
-        color: #43b2cb;
+        color: $secondary;
+      }
+
+      &.loading {
+        color: $secondary;
+        pointer-events: none;
       }
 
       &.disabled {

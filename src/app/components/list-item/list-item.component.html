@@ -1,0 +1,19 @@
+<div class="list-item-container" (click)="openAlbum()">
+  <div [ngClass]="['list-item-box', !album?.coverUrl ? 'empty' : '']">
+    <div *ngIf="!album?.coverUrl" class="list-item-box__no-img">
+      <p>i<br />could<br />be<br />the<br />cover</p>
+    </div>
+    <img
+      *ngIf="album?.coverUrl"
+      class="list-item-box__img"
+      [src]="album?.coverUrl"
+      [alt]="album?.title"
+    />
+    <div class="list-item-box__info">info.</div>
+  </div>
+  <div class="list-item-text">
+    <p>
+      {{ album?.title }}
+    </p>
+  </div>
+</div>

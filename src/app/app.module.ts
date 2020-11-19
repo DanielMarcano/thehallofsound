@@ -13,6 +13,11 @@ import { InputControlModule } from './components/input-control/input-control.mod
 import { PageContainerComponent } from './components/page-container/page-container.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { AlbumListComponent } from './components/album-list/album-list.component';
+import { ListItemComponent } from './components/list-item/list-item.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AlbumInfoComponent } from './components/album-info/album-info.component';
+import { EditAlbumComponent } from './components/edit-album/edit-album.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,11 @@ import { NotificationsComponent } from './components/notifications/notifications
     AddArtistComponent,
     AddAlbumComponent,
     NotificationsComponent,
+    AlbumListComponent,
+    ListItemComponent,
+    NotFoundComponent,
+    AlbumInfoComponent,
+    EditAlbumComponent,
   ],
   imports: [
     HttpClientModule,

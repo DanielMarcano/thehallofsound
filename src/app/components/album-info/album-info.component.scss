@@ -1,0 +1,141 @@
+@import "colors";
+
+.album-info-buttons {
+  display: flex;
+  align-items: center;
+  padding: 28px 0;
+
+  &__spacer {
+    flex: 1 0 auto;
+  }
+
+  &__item {
+    margin-top: -12px;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 40px;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:not(:first-child) {
+      margin-left: 36px;
+    }
+
+    &.delete {
+      color: $special;
+    }
+
+    &:hover {
+      color: $secondary;
+    }
+  }
+}
+
+.album-info-container {
+  display: flex;
+}
+
+.album-info-img {
+  width: 416px;
+  height: 416px;
+  margin-right: 80px;
+  position: relative;
+
+  &.empty {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  &__empty {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-weight: bold;
+    font-size: 58px;
+    line-height: 72px;
+    color: #ffffff;
+    display: block;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.album-info-content {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+
+  &__main {
+    background: $secondary;
+    color: #000000;
+    padding: 28px;
+    width: 100%;
+  }
+
+  .album-info-item {
+    display: block;
+
+    &__label {
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 32px;
+      margin-bottom: 16px;
+    }
+
+    &__value {
+      font-weight: normal;
+      font-size: 32px;
+      line-height: 32px;
+    }
+
+    &:not(:first-child) {
+      margin-top: 28px;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  .album-info-container {
+    flex-flow: column;
+  }
+
+  .album-info-img {
+    width: 240px;
+    height: 240px;
+    margin: 38px 0;
+    align-self: center;
+
+    &__empty {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-weight: bold;
+      font-size: 28px;
+      line-height: 40px;
+      color: #ffffff;
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .album-info-buttons {
+    flex-flow: column;
+
+    &__spacer {
+      display: none;
+    }
+
+    &__item {
+      &:not(:first-child) {
+        margin-left: 0;
+        margin-top: 36px;
+      }
+    }
+  }
+}

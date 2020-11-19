@@ -1,0 +1,67 @@
+<app-page-container title="Edit Album" color="secondary">
+  <div class="edit-album-container">
+    <div class="edit-album-container__buttons">
+      <div
+        class="edit-album-container__buttons__item danger"
+        (click)="goBack()"
+      >
+        <p>go back</p>
+      </div>
+      <div
+        (click)="onSubmit()"
+        [ngClass]="[
+          'edit-album-container__buttons__item',
+          !editAlbumForm?.valid ? 'disabled' : '',
+          loadingSave ? 'loading' : ''
+        ]"
+      >
+        <p>{{ loadingSave ? "loading..." : "save" }}</p>
+      </div>
+    </div>
+
+    <form
+      [formGroup]="untypedForm"
+      (ngSubmit)="onSubmit()"
+      class="edit-album-container__form"
+    >
+      <div class="edit-album-container__row">
+        <app-input-control
+          class="form-item"
+          inputLabel="title*"
+          formControlName="title"
+        ></app-input-control>
+        <app-input-control
+          class="form-item"
+          inputLabel="genre"
+          placeholder="is it indie?"
+          formControlName="genre"
+        ></app-input-control>
+        <!-- <app-input-control
+          class="form-item"
+          inputLabel="artist"
+          placeholder="XXXX"
+          formControlName="artistId"
+        ></app-input-control> -->
+      </div>
+      <div class="edit-album-container__row">
+        <app-file-upload
+          (deleted)="onDeleted()"
+          class="form-item"
+          formControlName="coverUrl"
+          inputLabel="cover"
+          [readonlyMode]="albumCover"
+        ></app-file-upload>
+      </div>
+      <div class="edit-album-container__row single">
+        <app-input-control
+          class="form-item"
+          inputLabel="year"
+          placeholder="2020"
+          type="number"
+          formControlName="year"
+          [error]="year?.errors ? 'must be between 1909 & 2030' : ''"
+        ></app-input-control>
+      </div>
+    </form>
+  </div>
+</app-page-container>

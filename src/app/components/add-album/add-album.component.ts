@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -20,11 +19,12 @@ import { NotificationsService } from '../notifications.service';
 export class AddAlbumComponent implements OnInit {
   addAlbumForm: IFormGroup<Album>;
 
+  loadingSave = false;
+
   public selectedFile = '';
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private albumApiService: AlbumApiService,
     private notificationsService: NotificationsService
   ) {
@@ -71,6 +71,8 @@ export class AddAlbumComponent implements OnInit {
   }
 
   async submit(): Promise<any> {
+    this.loadingSave = true;
+
     const parsedValue: Album = removeEmptyProps(this.addAlbumForm.value);
 
     const response = await this.albumApiService.addAlbum(parsedValue);
@@ -88,6 +90,8 @@ export class AddAlbumComponent implements OnInit {
         });
         this.resetForm();
       }
+
+      this.loadingSave = false;
     });
   }
 }

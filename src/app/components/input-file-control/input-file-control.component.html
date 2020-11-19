@@ -6,20 +6,31 @@
 
     <div
       role="button"
-      [ngClass]="['input-file__button', file?.name ? 'file-name' : '']"
+      [ngClass]="[
+        'input-file__button',
+        file?.name || readonlyMode?.imgUrl ? 'file-name' : ''
+      ]"
       (click)="inputFile.click()"
     >
-      <p>{{ imageBase64 ? file?.name : "upload" }}</p>
+      <p>
+        {{
+          imageBase64
+            ? file?.name
+            : readonlyMode?.imgUrl
+            ? readonlyMode?.imgTitle
+            : "upload"
+        }}
+      </p>
     </div>
   </div>
 
-  <div class="input-file-img" *ngIf="imageBase64">
-    <img [src]="imageBase64" alt="" />
+  <div class="input-file-img" *ngIf="imageBase64 || readonlyMode?.imgUrl">
+    <img [src]="imageBase64 || readonlyMode?.imgUrl" alt="" />
 
     <div
       role="button"
       class="input-file__button delete"
-      (click)="writeValue(null)"
+      (click)="deleteHandler()"
     >
       <p>delete</p>
     </div>

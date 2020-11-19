@@ -8,10 +8,8 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Album } from './album-api-model';
 
-interface ImageInfo {
-  title: string;
-  description: string;
-  link: string;
+export interface SavedAlbum extends Album {
+  _id: string;
 }
 
 @Injectable({
@@ -78,16 +76,39 @@ export class AlbumApiService {
     return this.http.post<Album[]>(this.albumsBaseUrl, albums);
   }
 
-  getAlbum(id?: string): Observable<Album | Album[]> {
-    const url = id ? `${this.albumBaseUrl}/${id}` : this.albumsBaseUrl;
-    return this.http.get<Album>(url);
+  getAlbum(id: string): Observable<SavedAlbum | { error: string | null }> {
+    return this.http.get<SavedAlbum>(`${this.albumBaseUrl}/${id}`).pipe(
+      catchError((err: HttpErrorResponse) => {
+        let response = null;
+
+        if (err?.error) {
+          response =
+            'The album was not found. You were redirected to the list!';
+        }
+
+        return of({ error: response });
+      })
+    );
   }
 
-  updateAlbum(album: Album, id: string): Observable<Album> {
-    return this.http.put<Album>(`${this.albumBaseUrl}/${id}`, album);
+  getAlbums(): Observable<SavedAlbum[]> {
+    return this.http.get<SavedAlbum[]>(`${this.albumsBaseUrl}/all`);
   }
 
-  deleteAlbum(id?: string): Observable<Album> {
-    return this.http.delete<Album>(`${this.albumBaseUrl}/${id}`);
+  async updateAlbum(album: SavedAlbum): Promise<Observable<any>> {
+    if (album.coverUrl && typeof album.coverUrl !== 'string') {
+      await this.uploadImage(album.coverUrl as File, {});
+    }
+
+    album.coverUrl = this.imageLink;
+
+    return this.http.put<SavedAlbum>(
+      `${this.albumBaseUrl}/${album._id}`,
+      album
+    );
+  }
+
+  deleteAlbum(id?: string): Observable<SavedAlbum> {
+    return this.http.delete<SavedAlbum>(`${this.albumBaseUrl}/${id}`);
   }
 }

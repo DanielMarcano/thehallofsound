@@ -1,0 +1,20 @@
+.album-list-container {
+  display: flex;
+  flex-flow: wrap;
+  margin: -36px;
+  justify-content: space-between;
+  cursor: pointer;
+
+  & > app-list-item {
+    margin: 36px;
+  }
+
+  &__spacer {
+    flex: 1 0 auto;
+  }
+
+  @media (max-width: 1100px) {
+    align-items: flex-start;
+    margin: 0;
+  }
+}

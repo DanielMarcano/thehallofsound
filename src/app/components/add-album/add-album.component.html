@@ -1,17 +1,18 @@
 <app-page-container title="Add Album" color="secondary">
   <div class="add-album-container">
     <div class="add-album-container__buttons">
-      <div class="add-album-container__buttons__item danger">
+      <a class="add-album-container__buttons__item danger" routerLink="/panel">
         <p>go back</p>
-      </div>
+      </a>
       <div
         (click)="onSubmit()"
         [ngClass]="[
           'add-album-container__buttons__item',
-          !addAlbumForm.valid ? 'disabled' : ''
+          !addAlbumForm.valid ? 'disabled' : '',
+          loadingSave ? 'loading' : ''
         ]"
       >
-        <p>save</p>
+        <p>{{ loadingSave ? "loading..." : "save" }}</p>
       </div>
     </div>
 
@@ -29,7 +30,7 @@
         <app-input-control
           class="form-item"
           inputLabel="genre"
-          placeholder="indie"
+          placeholder="is it pop?"
           formControlName="genre"
         ></app-input-control>
         <!-- <app-input-control
@@ -50,14 +51,10 @@
         <app-input-control
           class="form-item"
           inputLabel="year"
-          placeholder="XXXX"
+          placeholder="2020"
           type="number"
           formControlName="year"
-          [error]="
-            year?.errors && year?.value.length === 4
-              ? 'must be between 1909 & 2030'
-              : ''
-          "
+          [error]="year?.errors ? 'must be between 1909 & 2030' : ''"
         ></app-input-control>
       </div>
     </form>

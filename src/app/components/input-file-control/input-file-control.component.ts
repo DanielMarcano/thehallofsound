@@ -1,5 +1,17 @@
-import { Component, ElementRef, forwardRef, Input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+export interface ReadonlyMode {
+  imgUrl: string | File;
+  imgTitle: string;
+}
 
 @Component({
   selector: 'app-file-upload',
@@ -16,6 +28,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class InputFileControlComponent implements ControlValueAccessor {
   public file: File | null = null;
 
+  @Output()
+  deleted = new EventEmitter();
+
   @Input()
   inputLabel = '';
 
@@ -24,6 +39,9 @@ export class InputFileControlComponent implements ControlValueAccessor {
 
   @Input()
   error = '';
+
+  @Input()
+  readonlyMode: ReadonlyMode | undefined;
 
   focus = false;
 
@@ -63,6 +81,15 @@ export class InputFileControlComponent implements ControlValueAccessor {
   }
 
   constructor(private host: ElementRef<HTMLInputElement>) {}
+
+  deleteHandler(): void {
+    if (this.readonlyMode) {
+      this.deleted.emit();
+      this.readonlyMode = undefined;
+    }
+
+    this.writeValue(null);
+  }
 
   writeValue(value: any): void {
     if (value) {

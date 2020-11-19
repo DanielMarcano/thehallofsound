@@ -91,6 +91,10 @@ video {
   vertical-align: baseline;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Hide input[type="number"] arrows */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

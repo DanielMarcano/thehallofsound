@@ -1,0 +1,64 @@
+<app-page-container
+  [title]="album?.title || 'Album not found'"
+  color="secondary"
+>
+  <ng-container *ngIf="album">
+    <div class="album-info-buttons">
+      <a class="album-info-buttons__item" routerLink="/albums">go back</a>
+      <div class="album-info-buttons__spacer"></div>
+      <div
+        class="album-info-buttons__item delete"
+        *ngIf="aboutToDelete"
+        (click)="delete(false)"
+      >
+        cancel delete
+      </div>
+      <div class="album-info-buttons__item delete" (click)="delete()">
+        {{ aboutToDelete ? "confirm delete" : "delete" }}
+      </div>
+      <div class="album-info-buttons__item" (click)="editAlbum()">
+        edit info
+      </div>
+    </div>
+    <div class="album-info-container">
+      <div [ngClass]="['album-info-img', !album?.coverUrl ? 'empty' : '']">
+        <div *ngIf="!album?.coverUrl" class="album-info-img__empty">
+          <p>i<br />could<br />be<br />the<br />cover</p>
+        </div>
+        <img
+          *ngIf="album?.coverUrl"
+          [src]="album?.coverUrl"
+          [alt]="'cover of album ' + album?.title"
+        />
+      </div>
+      <div class="album-info-content">
+        <div class="album-info-content__main">
+          <div class="album-info-item">
+            <div class="album-info-item__label">
+              <p>title</p>
+            </div>
+            <div class="album-info-item__value">
+              <p>{{ album?.title }}</p>
+            </div>
+          </div>
+          <div class="album-info-item">
+            <div class="album-info-item__label">
+              <p>year</p>
+            </div>
+            <div class="album-info-item__value">
+              <p>{{ album?.year ? album?.year : "Unknown" }}</p>
+            </div>
+          </div>
+          <div class="album-info-item">
+            <div class="album-info-item__label">
+              <p>genre</p>
+            </div>
+            <div class="album-info-item__value">
+              <p>{{ album?.genre ? album?.genre : "Unknown" }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</app-page-container>

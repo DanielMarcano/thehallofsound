@@ -1,0 +1,105 @@
+@import "colors";
+
+.edit-album-container {
+  background: #ffffff;
+  padding: 28px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+
+  &__title {
+    color: #000000;
+    font-weight: bold;
+    font-size: 120px;
+    line-height: 120px;
+    margin-bottom: 100px;
+  }
+
+  &__form {
+    width: 100%;
+
+    .form-item {
+      margin-bottom: 38px;
+      flex: 1;
+    }
+  }
+
+  &__row {
+    display: flex;
+
+    & > * {
+      &:not(:first-child) {
+        margin-left: 80px;
+      }
+    }
+
+    &.single {
+      & > * {
+        max-width: calc(50% - 40px);
+      }
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    width: 100%;
+    margin-bottom: 38px;
+
+    &__item {
+      color: #000000;
+      font-weight: 600;
+      font-size: 64px;
+      line-height: 64px;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+
+      &.danger {
+        color: #fd6f89;
+      }
+
+      &:hover {
+        color: #43b2cb;
+      }
+
+      &.loading {
+        color: $secondary;
+        pointer-events: none;
+      }
+
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    &__row {
+      flex-flow: column;
+
+      & > * {
+        &:not(:first-child) {
+          margin-left: 0;
+        }
+
+        flex: 1;
+      }
+
+      &.single {
+        & > * {
+          max-width: none;
+        }
+      }
+    }
+
+    &__buttons {
+      &__item {
+        font-size: 32px;
+        line-height: 32px;
+      }
+    }
+  }
+}

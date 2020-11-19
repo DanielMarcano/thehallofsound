@@ -1,0 +1,9 @@
+<app-page-container title="Albums" color="secondary">
+  <div class="album-list-container">
+    <app-list-item
+      *ngFor="let album of fetchedAlbums | async"
+      [album]="album"
+    ></app-list-item>
+    <div class="album-list-container__spacer"></div>
+  </div>
+</app-page-container>

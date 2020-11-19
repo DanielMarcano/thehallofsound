@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Album } from './album-api-model';
 
@@ -67,7 +67,7 @@ export class AlbumApiService {
             'The title of the album already exists in our app, please try a different one.';
         }
 
-        return of({ error: response });
+        return throwError({ error: response });
       })
     );
   }
@@ -86,7 +86,7 @@ export class AlbumApiService {
             'The album was not found. You were redirected to the list!';
         }
 
-        return of({ error: response });
+        return throwError({ error: response });
       })
     );
   }

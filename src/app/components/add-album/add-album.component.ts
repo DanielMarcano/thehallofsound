@@ -62,6 +62,10 @@ export class AddAlbumComponent implements OnInit {
     return this.addAlbumForm.get('genre');
   }
 
+  goUp(): void {
+    window.scroll(0, 0);
+  }
+
   resetForm(): void {
     this.addAlbumForm.reset();
   }
@@ -77,21 +81,25 @@ export class AddAlbumComponent implements OnInit {
 
     const response = await this.albumApiService.addAlbum(parsedValue);
 
-    response.subscribe((data: any) => {
-      if (data.error) {
-        this.notificationsService.add({
-          type: 'error',
-          text: data.error,
-        });
-      } else {
+    response.subscribe(
+      (data: any) => {
         this.notificationsService.add({
           type: 'success',
           text: 'The album was successfully saved!',
         });
-        this.resetForm();
-      }
 
-      this.loadingSave = false;
-    });
+        this.resetForm();
+
+        this.loadingSave = false;
+      },
+      (err) => {
+        this.notificationsService.add({
+          type: 'error',
+          text: err.error,
+        });
+
+        this.loadingSave = false;
+      }
+    );
   }
 }

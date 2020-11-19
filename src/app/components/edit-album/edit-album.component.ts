@@ -128,6 +128,10 @@ export class EditAlbumComponent implements OnInit {
     return this.editAlbumForm as FormGroup;
   }
 
+  goUp(): void {
+    window.scroll(0, 0);
+  }
+
   async submit(): Promise<any> {
     this.loadingSave = true;
 
@@ -135,20 +139,23 @@ export class EditAlbumComponent implements OnInit {
 
     const response = await this.albumApiService.updateAlbum(parsedValue);
 
-    response.subscribe((data: any) => {
-      if (data.error) {
-        this.notificationsService.add({
-          type: 'error',
-          text: 'The album could not be updated. Please try again.',
-        });
-      } else {
+    response.subscribe(
+      (data: any) => {
         this.notificationsService.add({
           type: 'success',
           text: 'The album was successfully updated!',
         });
-      }
 
-      this.loadingSave = false;
-    });
+        this.loadingSave = false;
+      },
+      () => {
+        this.notificationsService.add({
+          type: 'error',
+          text: 'The album could not be updated. Please try again.',
+        });
+
+        this.loadingSave = false;
+      }
+    );
   }
 }
